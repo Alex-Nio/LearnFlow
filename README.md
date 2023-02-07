@@ -21,15 +21,15 @@ To install and run LearnFlow, follow the steps below:
 
 1. Clone the repository[^1]:
 
-[^1] git clone https://github.com/Alex-Nio/LearnFlow.git
+[^1]: git clone https://github.com/Alex-Nio/LearnFlow.git
 
 2. Install the required packages[^2]:
 
-[^2] npm install
+[^2]: npm install
 
 3. Run the application[^3]:
 
-[^3] npm run serve
+[^3]: npm run serve
 
 4. Open your browser and navigate to http://localhost:8080/ to view the application.
 
