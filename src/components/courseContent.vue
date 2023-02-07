@@ -17,6 +17,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.course-content {
+  padding: 20px;
+  background-color: white;
+  margin-top: 30px;
+  min-height: 270px;
+}
 .course-list__item {
   font-size: 1.6rem;
 }
