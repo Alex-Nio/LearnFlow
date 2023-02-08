@@ -1,12 +1,12 @@
 <template>
   <div
     class="subfolders"
-    v-if="has_files && this.folderName === this.contentFolders[targetIndex]['Папка']"
+    v-if="has_files && this.folderName === this.courseRootFiles[targetIndex]['Папка']"
   >
     <p
       class="sub-folder-item"
       @click="sourceCreator(i, 'subfolder')"
-      v-for="(item, i) in this.SubFolders"
+      v-for="(item, i) in this.inFolderFiles"
     >
       {{ item }}
     </p>
@@ -15,7 +15,7 @@
 
 <script>
 export default {
-  props: ["has_files", "folderName", "contentFolders", "SubFolders", "targetIndex"],
+  props: ["has_files", "folderName", "courseRootFiles", "inFolderFiles", "targetIndex"],
   methods: {
     findIndex(i) {
       this.$emit("find", i);
@@ -23,6 +23,9 @@ export default {
     sourceCreator(i, marker) {
       this.$emit("srcCreate", i, marker);
     },
+  },
+  mounted() {
+    console.log(this.SubFolders);
   },
 };
 </script>

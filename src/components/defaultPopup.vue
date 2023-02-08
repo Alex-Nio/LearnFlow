@@ -1,14 +1,7 @@
 <template>
-  <transition
-    :duration="810"
-    mode="out-in"
-    enter-active-class="animate__animated animate__fadeInUp"
-    leave-active-class="animate__animated animate__fadeOutDown"
-  >
-    <div v-if="has_files" class="popup">
-      <slot></slot>
-    </div>
-  </transition>
+  <div v-if="has_files" class="popup">
+    <slot></slot>
+  </div>
 </template>
 
 <script>
@@ -33,5 +26,6 @@ export default {
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
   border: 1px solid rgba(163, 163, 163, 0.3);
+  animation: fadeIn 0.5s linear;
 }
 </style>

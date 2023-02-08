@@ -3,45 +3,45 @@
 
   <!-- <video-player></video-player> -->
 
-  <div class="lesson">
+  <div class="root">
     <div class="content">
-      <!-- Папки -->
+      <!-- Папки в корне урока -->
       <lesson-folders
         @find="findIndex"
         @open="openFolder"
-        :contentFolders="contentFolders"
+        :courseRootFiles="courseRootFiles"
       ></lesson-folders>
 
-      <items-popup :has_files="has_files">
-        <!-- Подпапки -->
-        <sub-folders
-          :has_files="has_files"
-          :folderName="folderName"
-          :contentFolders="contentFolders"
-          :SubFolders="contentSubFolders"
-          :targetIndex="targetIndex"
-          @find="findIndex"
-          @srcCreate="sourceCreator"
-          :emits="['find', 'default']"
-        ></sub-folders>
-      </items-popup>
-
-      <!-- Файлы -->
-      <lesson-files
-        :contentFiles="contentFiles"
+      <!-- Файлы по дефолту в корне -->
+      <files-in-root
+        :inRootFiles="inRootFiles"
         @find="findIndex"
         @srcCreate="sourceCreator"
-      ></lesson-files>
+      ></files-in-root>
     </div>
+
+    <!-- TODO: Подапки в папке урока -->
+
+    <!-- Файлы внутри папки урока -->
+    <files-in-folders
+      :has_files="has_files"
+      :folderName="folderName"
+      :courseRootFiles="courseRootFiles"
+      :inFolderFiles="inFolderFiles"
+      :targetIndex="targetIndex"
+      @find="findIndex"
+      @srcCreate="sourceCreator"
+      :emits="['find', 'default']"
+    ></files-in-folders>
   </div>
 </template>
 
 <script>
 import videoPlayer from "@/components/videoPlayer.vue";
 import lessonFolders from "@/components/lessonFolders.vue";
-import lessonFiles from "@/components/lessonFiles.vue";
-import subFolders from "@/components/subFolders.vue";
-import itemsPopup from "@/components/itemsPopup.vue";
+import filesInRoot from "@/components/filesInRoot.vue";
+import filesInFolders from "@/components/filesInFolders.vue";
+import defaultPopup from "@/components/defaultPopup.vue";
 export default {
   props: {
     courses: {
@@ -54,19 +54,25 @@ export default {
   },
   components: {
     videoPlayer,
-    subFolders,
-    lessonFiles,
+    filesInFolders,
+    filesInRoot,
     lessonFolders,
-    itemsPopup,
+    defaultPopup,
   },
   data() {
     return {
       Title: "Default Title",
-      courseContent: [],
-      contentFolders: [],
-      contentFiles: [],
-      contentSubFolders: [],
-      contentSubFiles: [],
+      // Data-файл
+      courseData: [],
+      // Корень курса: Папки и Файлы
+      courseRootFiles: [],
+      // Только файлы в корне
+      inRootFiles: [],
+      // файлы в папке
+      inFolderFiles: [],
+      // Папки внутри папки курса
+      inFolderFolders: [],
+      // Индекс файла или папки
       fileIndex: null,
       targetIndex: null,
       fileName: "",
@@ -74,6 +80,7 @@ export default {
       rootDirectory: "./assets/data/Курсы",
       source: "",
       has_files: false,
+      has_more_folders: false,
     };
   },
   mounted() {
@@ -84,26 +91,26 @@ export default {
     this.Title = this.pageName;
 
     let arr = this.courses.categories;
-    let content = this.courseContent;
+    let content = this.courseData;
 
     for (let i = 0; i < arr.length; i++) {
-      let courseContent = arr[i];
+      let courseData = arr[i];
 
-      let fullContent = Object.entries(courseContent[1]);
+      let fullContent = Object.entries(courseData[1]);
       content.push(fullContent);
     }
 
-    this.courseContent.forEach((item) => {
+    this.courseData.forEach((item) => {
       for (let i = 0; i < item.length; i++) {
         let lesson = item[i];
 
         if (lesson[0] === this.pageName) {
-          this.contentFolders = lesson[1];
+          this.courseRootFiles = lesson[1];
 
           if (lesson[1]["Файлы"]) {
-            this.contentFiles = lesson[1]["Файлы"];
+            this.inRootFiles = lesson[1]["Файлы"];
           } else {
-            // this.contentFiles = ["Файлов нет"];
+            this.inRootFiles = ["Файлов нет"];
           }
         }
       }
@@ -114,24 +121,38 @@ export default {
       this.targetIndex = index;
 
       if (typeof index === "number") {
-        // console.log("its file");
-        this.contentSubFiles = this.contentFolders["Файлы"];
-        this.fileIndex = this.contentFolders["Файлы"][index];
+        console.log("its file");
+        this.fileIndex = this.courseRootFiles["Файлы"][index];
         this.fileName = this.fileIndex;
         this.source = `${this.rootDirectory}/${this.Title}/${this.fileName}`;
       } else {
-        // console.log("its folder");
-        this.folderName = this.contentFolders[index]["Папка"];
-        this.contentSubFolders = this.contentFolders[index]["Файлы"];
+        console.log("its folder");
+        if (!this.courseRootFiles[index]["Файлы"]) {
+          console.log("Есть подпапки");
+
+          let moreFolders = Object.keys(this.courseRootFiles[index]).filter(
+            (item) => item !== "Папка"
+          );
+
+          this.inFolderFolders = moreFolders;
+          this.has_more_folders = true;
+          // moreFolders.forEach((folder) => {
+          //   console.log(this.courseRootFiles[index][folder]["Папка"]);
+          // });
+        }
+        this.folderName = this.courseRootFiles[index]["Папка"];
+        this.inFolderFiles = this.courseRootFiles[index]["Файлы"];
       }
     },
-    openFolder() {
+    openFolder(i) {
+      console.log(i);
+      this.active = true;
       //TODO: Возможна ошибка связанная с sub-folders
       this.has_files = true;
     },
     sourceCreator(i, marker) {
       if (marker === "subfolder") {
-        this.fileName = this.contentSubFolders[i];
+        this.fileName = this.inFolderFiles[i];
         this.source = `${this.rootDirectory}/${this.Title}/${this.folderName}/${this.fileName}`;
       } else {
         this.source = `${this.rootDirectory}/${this.Title}/${this.fileName}`;
@@ -146,7 +167,15 @@ export default {
 
 <style lang="scss" scoped>
 .content {
+  width: 100%;
   position: relative;
+}
+
+.root {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 100%;
 }
 
 .course-title {
