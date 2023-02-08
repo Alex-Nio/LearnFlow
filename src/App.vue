@@ -1,20 +1,24 @@
 <template>
   <div class="full-wrapper">
-    <header class="header">
-      <nav class="nav">
-        <router-link class="nav-item" to="/">На Главную</router-link>
-      </nav>
-    </header>
-    <div class="container">
-      <router-view :courses="courses" :pageName="this.$route.params.pageName" />
-    </div>
+    <Navigation></Navigation>
+    <main>
+      <div class="container">
+        <div class="main-content">
+          <router-view :courses="courses" :pageName="this.$route.params.pageName" />
+        </div>
+      </div>
+    </main>
   </div>
 </template>
 
 <script>
 import coursesData from "@/assets/data/courses";
+import Navigation from "./components/Navigation.vue";
 
 export default {
+  components: {
+    Navigation,
+  },
   data() {
     return {
       courses: {
@@ -42,7 +46,7 @@ export default {
 
 .header {
   width: 100%;
-  height: 100px;
+  height: 75px;
 }
 .nav {
   @include fdrjs_aic;

@@ -1,6 +1,6 @@
 <template>
   <div class="folder-content" v-for="(folder, i) in this.contentFolders">
-    <p @click="findIndex(i), openFolder()" style="font-size: 2rem">
+    <p class="folder-content__item" @click="findIndex(i), openFolder()">
       {{ folder["Папка"] }}
     </p>
   </div>
@@ -21,4 +21,13 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.folder-content__item {
+  font-size: 2.2rem;
+
+  &:hover {
+    color: red;
+    cursor: pointer;
+  }
+}
+</style>

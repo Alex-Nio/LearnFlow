@@ -3,7 +3,11 @@
     class="subfolders"
     v-if="has_files && this.folderName === this.contentFolders[targetIndex]['Папка']"
   >
-    <p @click="defaultOpen(i, 'folder')" v-for="(item, i) in this.SubFolders">
+    <p
+      class="sub-folder-item"
+      @click="sourceCreator(i, 'subfolder')"
+      v-for="(item, i) in this.SubFolders"
+    >
       {{ item }}
     </p>
   </div>
@@ -16,11 +20,20 @@ export default {
     findIndex(i) {
       this.$emit("find", i);
     },
-    defaultOpen(i, marker) {
-      this.$emit("default", i, marker);
+    sourceCreator(i, marker) {
+      this.$emit("srcCreate", i, marker);
     },
   },
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.sub-folder-item {
+  font-size: 2rem;
+
+  &:hover {
+    cursor: pointer;
+    color: white;
+  }
+}
+</style>

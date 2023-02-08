@@ -1,5 +1,6 @@
 <template>
   <h1 class="course-title">{{ Title }}</h1>
+
   <!-- <video-player></video-player> -->
 
   <div class="lesson">
@@ -11,23 +12,25 @@
         :contentFolders="contentFolders"
       ></lesson-folders>
 
-      <!-- Подпапки -->
-      <sub-folders
-        :has_files="has_files"
-        :folderName="folderName"
-        :contentFolders="contentFolders"
-        :SubFolders="contentSubFolders"
-        :targetIndex="targetIndex"
-        @find="findIndex"
-        @default="defaultOpen"
-        :emits="['find', 'default']"
-      ></sub-folders>
+      <items-popup :has_files="has_files">
+        <!-- Подпапки -->
+        <sub-folders
+          :has_files="has_files"
+          :folderName="folderName"
+          :contentFolders="contentFolders"
+          :SubFolders="contentSubFolders"
+          :targetIndex="targetIndex"
+          @find="findIndex"
+          @srcCreate="sourceCreator"
+          :emits="['find', 'default']"
+        ></sub-folders>
+      </items-popup>
 
       <!-- Файлы -->
       <lesson-files
         :contentFiles="contentFiles"
         @find="findIndex"
-        @default="defaultOpen"
+        @srcCreate="sourceCreator"
       ></lesson-files>
     </div>
   </div>
@@ -38,7 +41,7 @@ import videoPlayer from "@/components/videoPlayer.vue";
 import lessonFolders from "@/components/lessonFolders.vue";
 import lessonFiles from "@/components/lessonFiles.vue";
 import subFolders from "@/components/subFolders.vue";
-
+import itemsPopup from "@/components/itemsPopup.vue";
 export default {
   props: {
     courses: {
@@ -54,6 +57,7 @@ export default {
     subFolders,
     lessonFiles,
     lessonFolders,
+    itemsPopup,
   },
   data() {
     return {
@@ -73,6 +77,10 @@ export default {
     };
   },
   mounted() {
+    if (this.$route.path != "/") {
+      window.removeEventListener("wheel", this.onSlideChange, this.onSwiper);
+    }
+
     this.Title = this.pageName;
 
     let arr = this.courses.categories;
@@ -95,7 +103,7 @@ export default {
           if (lesson[1]["Файлы"]) {
             this.contentFiles = lesson[1]["Файлы"];
           } else {
-            this.contentFiles = ["Файлов нет"];
+            // this.contentFiles = ["Файлов нет"];
           }
         }
       }
@@ -121,8 +129,8 @@ export default {
       //TODO: Возможна ошибка связанная с sub-folders
       this.has_files = true;
     },
-    defaultOpen(i, marker) {
-      if (marker === "folder") {
+    sourceCreator(i, marker) {
+      if (marker === "subfolder") {
         this.fileName = this.contentSubFolders[i];
         this.source = `${this.rootDirectory}/${this.Title}/${this.folderName}/${this.fileName}`;
       } else {
@@ -130,7 +138,7 @@ export default {
       }
 
       // logger
-      console.log(this.fileName);
+      console.log(this.source);
     },
   },
 };
@@ -142,7 +150,18 @@ export default {
 }
 
 .course-title {
-  font-size: 6rem;
+  font-size: 4rem;
   text-align: center;
+  margin-bottom: 45px;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

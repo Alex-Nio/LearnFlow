@@ -15,7 +15,10 @@
     class="mySwiper"
   >
     <swiper-slide class="courses" v-for="(category, index) in this.courses.categories">
-      <div @click="openCategory(category, index)" class="course-title">
+      <div
+        @click="openCategory(category, index), slideToActiveSlide(index)"
+        class="course-title"
+      >
         {{ category[0] }}
       </div>
     </swiper-slide>
@@ -37,42 +40,57 @@ import { Mousewheel, Pagination } from "swiper";
 export default {
   props: ["courses"],
   emits: ["open"],
+  data() {
+    return {
+      activeSlideIndex: null,
+      onSwiper: (swiper) => {
+        let slides;
+
+        if (swiper) {
+          slides = document.querySelectorAll(".swiper-slide");
+
+          slides[swiper.activeIndex].lastElementChild.click();
+        }
+      },
+      onSlideChange: (swiper) => {
+        let slides;
+
+        if (swiper) {
+          slides = document.querySelectorAll(".swiper-slide");
+
+          slides[swiper.activeIndex].lastElementChild.click();
+        }
+
+        console.log("slide change");
+        document.addEventListener("wheel", (event) => {
+          // Move down / up wheel
+          if (event.deltaY > 0) {
+            swiper.slidePrev(800);
+          } else {
+            swiper.slideNext(800);
+          }
+        });
+      },
+      modules: [Mousewheel, Pagination],
+    };
+  },
   components: {
     Swiper,
     SwiperSlide,
   },
   methods: {
     openCategory(category, index) {
+      this.activeSlideIndex = index;
       this.$emit("open", category, index);
     },
-  },
-  setup() {
-    // Slide Content Toggle
-    function slideContentToggle(slideSelector, courseTitle) {
-      let x = document.querySelector(slideSelector).querySelector(courseTitle);
-      x.click();
-    }
-
-    const onSwiper = (swiper) => {
-      slideContentToggle(".swiper-slide-active", ".course-title");
-    };
-    const onSlideChange = (swiper) => {
-      console.log("slide change");
-
-      document.addEventListener("wheel", (event) => {
-        // Move down / up wheel
-        if (event.deltaY > 0) {
-          slideContentToggle(".swiper-slide-active", ".course-title");
-        } else {
-          slideContentToggle(".swiper-slide-active", ".course-title");
-        }
-      });
-    };
-    return {
-      onSwiper,
-      onSlideChange,
-      modules: [Mousewheel, Pagination],
-    };
+    slideToActiveSlide(index) {
+      const swiperElement = document.querySelector(".swiper");
+      if (swiperElement) {
+        const swiper = swiperElement.swiper;
+        const w = swiper.slidesEl;
+        swiper.slideToLoop(index);
+      }
+    },
   },
 };
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div class="files" v-for="(folder, i) in this.contentFiles">
-    <p @click="findIndex(i), defaultOpen(i, 'file')" style="font-size: 2rem">
+    <p @click="findIndex(i), sourceCreator(i, 'file')">
       {{ folder }}
     </p>
   </div>
@@ -9,13 +9,13 @@
 <script>
 export default {
   props: ["contentFiles"],
-  emits: ["find", "default"],
+  emits: ["find", "srcCreate"],
   methods: {
     findIndex(i) {
       this.$emit("find", i);
     },
-    defaultOpen(i, marker) {
-      this.$emit("default", i, marker);
+    sourceCreator(i, marker) {
+      this.$emit("srcCreate", i, marker);
     },
   },
 };
