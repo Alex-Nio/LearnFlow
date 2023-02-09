@@ -11,6 +11,7 @@
     <course-content
       v-if="this.activeCategoryIndex !== null"
       :category="activeCategory"
+      :categoryName="categoryName"
       :key="activeCategoryIndex"
     ></course-content>
   </transition>
@@ -36,6 +37,7 @@ export default {
       activeCategory: "",
       activeCategoryIndex: null,
       trigger: false,
+      categoryName: "",
     };
   },
   methods: {
@@ -43,6 +45,7 @@ export default {
       this.activeCategoryIndex = index;
       this.activeCategory = category;
       this.trigger = true;
+      this.categoryName = this.activeCategory[0];
     },
   },
 };

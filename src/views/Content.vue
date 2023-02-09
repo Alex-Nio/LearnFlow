@@ -1,6 +1,5 @@
 <template>
   <h1 class="course-title">{{ Title }}</h1>
-
   <video-player
     v-if="videoOpen"
     :source="source"
@@ -58,15 +57,7 @@ import filesInFolders from "@/components/filesInFolders.vue";
 import subfoldersInFolders from "@/components/deepFoldering/subfoldersInFolders.vue";
 import defaultPopup from "@/components/defaultPopup.vue";
 export default {
-  props: {
-    courses: {
-      type: Object,
-      required: true,
-    },
-    pageName: {
-      type: String,
-    },
-  },
+  props: ["courses", "pageName", "categoryName"],
   components: {
     videoPlayer,
     filesInFolders,
@@ -178,7 +169,6 @@ export default {
     openFolder(i, folder) {
       console.log("Открыта папка " + i);
       this.subfolderContentFiles = folder;
-
       //TODO: Возможна ошибка связанная с sub-folders
       this.has_files = true;
     },
@@ -232,7 +222,6 @@ export default {
     },
     openVideo() {
       console.log("video opened");
-      console.log(this.source);
 
       if (this.source.includes(".mp4")) {
         this.videoOpen = !this.videoOpen;
