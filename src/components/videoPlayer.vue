@@ -8,6 +8,8 @@
         :src="source"
         :title="fileName"
         @ended="playEnded"
+        resolution="1080p"
+        :view-core="viewCore.bind(null, 'video1')"
         cover="https://i.ytimg.com/vi/poPoWF3wSYI/maxresdefault.jpg"
       >
       </vue3-video-player>
@@ -18,16 +20,87 @@
 <script>
 export default {
   props: ["source", "fileName"],
+  data() {
+    return {
+      players: {},
+      volume: 50,
+    };
+  },
   methods: {
+    viewCore(id, player) {
+      // console.log(id, player);
+      this.players[id] = player;
+    },
+    play(id) {
+      // console.log("custom play: id =", id);
+      this.players && this.players[id] && this.players[id].play();
+    },
+    destroy(id) {
+      this.players && this.players[id] && this.players[id].destroy();
+    },
     playEnded(e) {
-      console.log(e);
+      // console.log(e);
       if (e.target === document.pictureInPictureElement) {
         document.exitPictureInPicture();
       }
     },
+    volumeUp(id) {
+      this.volume += 2;
+      if (this.volume > 100) {
+        this.volume = 100;
+      }
+      this.players &&
+        this.players[id] &&
+        this.players[id].setVolume(this.volume / 100, true);
+    },
+    volumeDown(id) {
+      this.volume -= 2;
+      if (this.volume < 0) {
+        this.volume = 0;
+      }
+      this.players &&
+        this.players[id] &&
+        this.players[id].setVolume(this.volume / 100, true);
+    },
     closeVideo() {
       this.$emit("closeVideo");
     },
+  },
+  mounted() {
+    let btn = document.querySelector(".btn-volume");
+    let volumeCntrl = document.querySelector(".volume-current");
+    let volumeInfo = document.querySelector(".volume-info");
+    let mouseEnterHandler;
+
+    function volumeUpdate(volume) {
+      volumeCntrl.style.height = `${volume}%`;
+      volumeInfo.innerText = `${volumeCntrl.style.height}`;
+    }
+
+    mouseEnterHandler = () => {
+      let wheelHandler = (event) => {
+        // Move down / up wheel
+        if (event.deltaY > 0) {
+          this.volumeDown("video1");
+          volumeUpdate(this.volume);
+        } else {
+          this.volumeUp("video1");
+          volumeUpdate(this.volume);
+        }
+      };
+
+      document.addEventListener("wheel", wheelHandler);
+      btn.addEventListener("mouseleave", () => {
+        document.removeEventListener("wheel", wheelHandler);
+      });
+    };
+
+    btn.addEventListener("mouseenter", mouseEnterHandler);
+
+    volumeUpdate(this.volume);
+  },
+  beforeDestroy() {
+    btn.removeEventListener("mouseenter", mouseEnterHandler);
   },
 };
 </script>

@@ -56,7 +56,7 @@ export default {
 <style lang="scss" scoped>
 .subfolders {
   position: absolute;
-  top: 37%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: calc(100% - 40px);
@@ -76,17 +76,20 @@ export default {
 }
 
 /* хром, сафари */
-.subfolders::-webkit-scrollbar {
+.subfolders::-webkit-scrollbar,
+.content::-webkit-scrollbar {
   width: 0;
 }
 
 /* ie 10+ */
-.subfolders {
+.subfolders,
+.content {
   -ms-overflow-style: none;
 }
 
 /* фф (свойство больше не работает, других способов тоже нет)*/
-.subfolders {
+.subfolders,
+.content {
   overflow: -moz-scrollbars-none;
 }
 

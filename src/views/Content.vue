@@ -146,7 +146,7 @@ export default {
 
         // Если внутри папки есть ещё папки
         if (Object.entries(this.courseRootFiles[index]).length > 2) {
-          console.log("Есть подпапки");
+          // console.log("Есть подпапки");
 
           // Находим подпапки
           let moreFolders = Object.keys(this.courseRootFiles[index]).filter(
@@ -275,7 +275,7 @@ export default {
 }
 
 .course-title {
-  font-size: 4rem;
+  font-size: 2.8rem;
   text-align: center;
   margin-bottom: 25px;
   text-transform: uppercase;

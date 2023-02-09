@@ -46,11 +46,12 @@ export default {
 
 .main-content {
   min-height: calc(100vh - 135px);
+  max-height: calc(100vh - 135px);
 }
 
 .header {
   width: 100%;
-  height: 60px;
+  height: 80px;
 }
 .nav {
   @include fdrjs_aic;
