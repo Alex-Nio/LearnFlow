@@ -1,13 +1,10 @@
 <template>
-  <div
-    class="subfolders"
-    v-if="has_files && this.folderName === this.courseRootFiles[targetIndex]['Папка']"
-  >
+  <div class="subfolders" v-if="has_files">
     <div v-if="this.inFolderFiles" class="sub-files">
       <p style="font-weight: bold; font-size: 2rem">Файлы</p>
       <p
         class="sub-folder-item"
-        @click="sourceCreator(i, 'subfile')"
+        @click="sourceCreator(i, 'subfile'), openVideo()"
         v-for="(item, i) in this.inFolderFiles"
       >
         {{ item }}
@@ -17,7 +14,7 @@
       <p style="font-weight: bold; font-size: 2rem">Подпапки</p>
       <p
         class="sub-folder-item"
-        @click="sourceCreator(i, 'subfolder', item), findSubFiles(i, item)"
+        @click="sourceCreator(i, 'subfolder', item), findSubFiles(i, item), openVideo()"
         v-for="(item, i) in this.inFolderFolders"
       >
         {{ item }}
@@ -42,6 +39,9 @@ export default {
     },
     findSubFiles(i, item) {
       this.$emit("findSubFiles", i, item);
+    },
+    openVideo() {
+      this.$emit("openVideo");
     },
   },
 };

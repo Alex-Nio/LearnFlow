@@ -1,7 +1,12 @@
 <template>
   <h1 class="course-title">{{ Title }}</h1>
 
-  <!-- <video-player></video-player> -->
+  <video-player
+    v-if="videoOpen"
+    :source="source"
+    :fileName="fileName.replace('.mp4', '')"
+    @closeVideo="closeVideo"
+  ></video-player>
 
   <div class="root">
     <div class="content">
@@ -30,15 +35,17 @@
       :targetIndex="targetIndex"
       @findSubFiles="findSubFiles"
       @srcCreate="sourceCreator"
+      @openVideo="openVideo"
       :emits="['find', 'default']"
     ></files-in-folders>
 
     <!-- TODO: Подапки -->
-    <subfolders-in-folders
+    <!-- <subfolders-in-folders
       :filtredSubFiles="filtredSubfolderContentFiles"
       :filtredSubFolders="filtredSubfolderContentFolders"
       :deepFolders="deepFolders"
-    ></subfolders-in-folders>
+      >В разработке</subfolders-in-folders
+    > -->
   </div>
 </template>
 
@@ -97,6 +104,7 @@ export default {
       source: "",
       has_files: false,
       has_more_folders: false,
+      videoOpen: false,
     };
   },
   mounted() {
@@ -138,7 +146,10 @@ export default {
         console.log("its file");
         this.fileIndex = this.courseRootFiles["Файлы"][index];
         this.fileName = this.fileIndex;
-        this.source = `${this.rootDirectory}/${this.Title}/${this.fileName}`;
+        this.source = `${this.rootDirectory}/${decodeURI(this.$route.path)}/${
+          this.fileName
+        }`;
+        this.openVideo();
       } else {
         console.log("its folder");
 
@@ -169,7 +180,6 @@ export default {
       console.log("Открыта папка " + i);
       this.subfolderContentFiles = folder;
 
-      console.log(this.courseRootFiles);
       //TODO: Возможна ошибка связанная с sub-folders
       this.has_files = true;
     },
@@ -178,13 +188,17 @@ export default {
 
       if (marker === "subfile") {
         this.fileName = this.inFolderFiles[i];
-        this.source = `${this.rootDirectory}/${this.Title}/${this.folderName}/${this.fileName}`;
+        this.source = `${this.rootDirectory}/${decodeURI(this.$route.path)}/${
+          this.folderName
+        }/${this.fileName}`;
       } else if (marker === "subfolder") {
-        this.source = `${this.rootDirectory}/${this.Title}/${this.subfolderName}/ИМЯ ФАЙЛА`;
+        this.source = `${this.rootDirectory}/${decodeURI(this.$route.path)}/${
+          this.subfolderName
+        }/ИМЯ ФАЙЛА`;
       }
 
       // logger
-      console.log(this.source);
+      // console.log(this.source);
     },
     findSubFiles(i, item) {
       this.filtredSubfolderContentFiles = "";
@@ -213,14 +227,26 @@ export default {
 
       this.filtredSubfolderContentFolders.forEach((item) => {
         if (Object.entries(item)[0][0] == "Папка") {
-          console.log(item);
           deepFolders.push(item);
         }
       });
 
       this.deepFolders = deepFolders;
+    },
+    openVideo() {
+      console.log("video opened");
+      console.log(this.source);
 
-      console.log(this.deepFolders);
+      if (this.source.includes(".mp4")) {
+        this.videoOpen = !this.videoOpen;
+        console.log(".mp4 found in the string");
+      } else {
+        window.open(this.source);
+        console.log(".mp4 not found in the string");
+      }
+    },
+    closeVideo() {
+      this.videoOpen = !this.videoOpen;
     },
   },
 };

@@ -1,4 +1,5 @@
 <template>
+  <slot></slot>
   <div class="sub-folders-more">
     <p style="font-size: 2rem; font-weight: bold">Контент подпапки</p>
     <div v-for="(item, i) in filtredSubFiles[0]">
