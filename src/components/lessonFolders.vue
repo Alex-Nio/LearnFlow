@@ -1,6 +1,6 @@
 <template>
   <div class="root-folders" v-for="(folder, i) in this.courseRootFiles">
-    <p class="root-folders__item" @click="findIndex(i), openFolder(i)">
+    <p class="root-folders__item" @click="findIndex(i), openFolder(i, folder)">
       {{ folder["Папка"] }}
     </p>
   </div>
@@ -14,8 +14,8 @@ export default {
     findIndex(i) {
       this.$emit("find", i);
     },
-    openFolder(i) {
-      this.$emit("open", i);
+    openFolder(i, folder) {
+      this.$emit("open", i, folder);
     },
   },
 };

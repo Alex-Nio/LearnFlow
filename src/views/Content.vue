@@ -20,9 +20,7 @@
       ></files-in-root>
     </div>
 
-    <!-- TODO: Подапки в папке урока -->
-
-    <!-- Файлы внутри папки урока -->
+    <!-- Файлы и папки внутри папки урока -->
     <files-in-folders
       :has_files="has_files"
       :folderName="folderName"
@@ -34,6 +32,12 @@
       @srcCreate="sourceCreator"
       :emits="['find', 'default']"
     ></files-in-folders>
+
+    <!-- TODO: Подапки -->
+    <subfolders-in-folders
+      :filtredSubFiles="filtredSubfolderContentFiles"
+      :filtredSubFolders="filtredSubfolderContentFolders"
+    ></subfolders-in-folders>
   </div>
 </template>
 
@@ -42,6 +46,7 @@ import videoPlayer from "@/components/videoPlayer.vue";
 import lessonFolders from "@/components/lessonFolders.vue";
 import filesInRoot from "@/components/filesInRoot.vue";
 import filesInFolders from "@/components/filesInFolders.vue";
+import subfoldersInFolders from "@/components/subfoldersInFolders.vue";
 import defaultPopup from "@/components/defaultPopup.vue";
 export default {
   props: {
@@ -58,6 +63,7 @@ export default {
     filesInFolders,
     filesInRoot,
     lessonFolders,
+    subfoldersInFolders,
     defaultPopup,
   },
   data() {
@@ -73,6 +79,11 @@ export default {
       inFolderFiles: [],
       // Папки внутри папки курса
       inFolderFolders: [],
+      // Контент в подпапке
+      subfolderContentFiles: [],
+      // Отфильтрованное содержимое подпапки
+      filtredSubfolderContentFiles: [],
+      filtredSubfolderContentFolders: [],
       // Индекс файла или папки
       fileIndex: null,
       targetIndex: null,
@@ -151,8 +162,10 @@ export default {
         this.inFolderFiles = this.courseRootFiles[index]["Файлы"];
       }
     },
-    openFolder(i) {
+    openFolder(i, folder) {
       console.log("Открыта папка " + i);
+      this.subfolderContentFiles = folder;
+
       console.log(this.courseRootFiles);
       //TODO: Возможна ошибка связанная с sub-folders
       this.has_files = true;
@@ -170,7 +183,25 @@ export default {
       // logger
       console.log(this.source);
     },
-    findSubFiles(i, item) {},
+    findSubFiles(i, item) {
+      // console.log(this.subfolderContentFiles[item]);
+      let mutation = Object.entries(this.subfolderContentFiles[item]);
+      let subContentFiles = [],
+        subContentFolders = [];
+
+      for (const [key, value] of mutation) {
+        if (key !== "Папка") {
+          if (key == "Файлы") {
+            subContentFiles.push(value);
+          } else {
+            subContentFolders.push(value);
+          }
+        }
+      }
+
+      this.filtredSubfolderContentFiles = subContentFiles;
+      this.filtredSubfolderContentFolders = subContentFolders;
+    },
   },
 };
 </script>
