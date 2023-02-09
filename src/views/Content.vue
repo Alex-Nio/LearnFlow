@@ -36,6 +36,7 @@
       @findSubFiles="findSubFiles"
       @srcCreate="sourceCreator"
       @openVideo="openVideo"
+      @closePanel="closePanel"
       :emits="['find', 'default']"
     ></files-in-folders>
 
@@ -100,7 +101,7 @@ export default {
       fileName: "",
       folderName: "",
       subfolderName: "",
-      rootDirectory: "./assets/data/Курсы",
+      rootDirectory: "data",
       source: "",
       has_files: false,
       has_more_folders: false,
@@ -146,9 +147,7 @@ export default {
         console.log("its file");
         this.fileIndex = this.courseRootFiles["Файлы"][index];
         this.fileName = this.fileIndex;
-        this.source = `${this.rootDirectory}/${decodeURI(this.$route.path)}/${
-          this.fileName
-        }`;
+        this.source = `${decodeURI(this.$route.path)}/${this.fileName}`;
         this.openVideo();
       } else {
         console.log("its folder");
@@ -188,13 +187,11 @@ export default {
 
       if (marker === "subfile") {
         this.fileName = this.inFolderFiles[i];
-        this.source = `${this.rootDirectory}/${decodeURI(this.$route.path)}/${
-          this.folderName
-        }/${this.fileName}`;
+        this.source = `${decodeURI(this.$route.path)}/${this.folderName}/${
+          this.fileName
+        }`;
       } else if (marker === "subfolder") {
-        this.source = `${this.rootDirectory}/${decodeURI(this.$route.path)}/${
-          this.subfolderName
-        }/ИМЯ ФАЙЛА`;
+        this.source = `${decodeURI(this.$route.path)}/${this.subfolderName}/ИМЯ ФАЙЛА`;
       }
 
       // logger
@@ -248,14 +245,35 @@ export default {
     closeVideo() {
       this.videoOpen = !this.videoOpen;
     },
+    closePanel() {
+      this.has_files = false;
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
 .content {
-  width: 100%;
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow-inline: hidden;
+  width: calc(100% - 40px);
+  max-height: calc(100vh - 235px);
+  position: absolute;
+  top: 115px;
+  left: 50%;
+  transform: translateX(-50%);
+  overflow: hidden;
+  overflow-y: scroll;
+  padding: 40px;
+  /* From https://css.glass */
+  background: rgba(234, 244, 244, 0.23);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(9.6px);
+  -webkit-backdrop-filter: blur(9.6px);
+  border: 1px solid rgba(234, 244, 244, 0.09);
 }
 
 .root {

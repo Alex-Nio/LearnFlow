@@ -1,7 +1,7 @@
 <template>
   <div class="full-wrapper">
     <Navigation></Navigation>
-    <main>
+    <main class="main">
       <div class="container">
         <div class="main-content">
           <router-view :courses="courses" :pageName="this.$route.params.pageName" />
@@ -43,6 +43,10 @@ export default {
 
 <style lang="scss">
 @import "./assets/scss/imports.scss";
+
+.main-content {
+  min-height: calc(100vh - 135px);
+}
 
 .header {
   width: 100%;

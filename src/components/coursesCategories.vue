@@ -12,7 +12,7 @@
     :modules="modules"
     @swiper="onSwiper"
     @slideChange="onSlideChange"
-    class="mySwiper"
+    class="slider"
   >
     <swiper-slide class="courses" v-for="(category, index) in this.courses.categories">
       <div
@@ -97,6 +97,10 @@ export default {
 <style lang="scss" scoped>
 $slider-max-height: 270px;
 
+.slider {
+  margin-bottom: 40px;
+}
+
 .course-title {
   font-size: 3.6rem;
   text-align: center;
@@ -130,5 +134,15 @@ $slider-max-height: 270px;
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+@media screen and (min-width: 320px) and (max-width: 768px) {
+  .course-title {
+    font-size: 1.8rem;
+  }
+
+  .swiper {
+    max-height: 346px;
+  }
 }
 </style>

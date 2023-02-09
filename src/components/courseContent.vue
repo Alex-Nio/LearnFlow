@@ -25,16 +25,23 @@ export default {
   padding: 20px;
   background: rgba(255, 255, 255, 0.2);
   border-radius: 16px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
   border: 1px solid rgba(255, 255, 255, 0.3);
-  margin: 45px auto;
+  margin: 0 auto;
   min-height: 270px;
+  transition: all 0.5s ease-out;
+  box-sizing: border-box;
 }
 .course-list__item {
   font-size: 2.2rem;
   margin: 10px 0;
   text-align: center;
+}
+
+@media screen and (min-width: 320px) and (max-width: 768px) {
+  .course-list__item {
+    font-size: 1.4rem;
+  }
 }
 </style>

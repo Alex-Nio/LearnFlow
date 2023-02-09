@@ -68,7 +68,7 @@ export default {
   width: 100%;
   height: 100%;
   position: relative;
-  margin: 15px auto;
+  margin: 0 auto;
   animation: fadeIn 0.5s ease-in-out;
 }
 
