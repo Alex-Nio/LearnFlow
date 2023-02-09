@@ -61,7 +61,6 @@ export default {
           slides[swiper.activeIndex].lastElementChild.click();
         }
 
-        console.log("slide change");
         document.addEventListener("wheel", (event) => {
           // Move down / up wheel
           if (event.deltaY > 0) {

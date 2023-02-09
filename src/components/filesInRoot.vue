@@ -1,5 +1,5 @@
 <template>
-  <div class="files">
+  <div class="root-files">
     <div v-for="(folder, i) in this.inRootFiles">
       <p @click="findIndex(i), sourceCreator(i, 'file')">
         {{ folder }}
@@ -24,8 +24,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.files {
-  margin-top: 10px;
+.root-files {
+  margin: 25px 0;
   font-size: 2.2rem;
 }
 </style>

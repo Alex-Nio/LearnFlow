@@ -28,8 +28,9 @@
       :folderName="folderName"
       :courseRootFiles="courseRootFiles"
       :inFolderFiles="inFolderFiles"
+      :inFolderFolders="inFolderFolders"
       :targetIndex="targetIndex"
-      @find="findIndex"
+      @findSubFiles="findSubFiles"
       @srcCreate="sourceCreator"
       :emits="['find', 'default']"
     ></files-in-folders>
@@ -77,6 +78,7 @@ export default {
       targetIndex: null,
       fileName: "",
       folderName: "",
+      subfolderName: "",
       rootDirectory: "./assets/data/Курсы",
       source: "",
       has_files: false,
@@ -109,8 +111,6 @@ export default {
 
           if (lesson[1]["Файлы"]) {
             this.inRootFiles = lesson[1]["Файлы"];
-          } else {
-            this.inRootFiles = ["Файлов нет"];
           }
         }
       }
@@ -127,11 +127,14 @@ export default {
         this.source = `${this.rootDirectory}/${this.Title}/${this.fileName}`;
       } else {
         console.log("its folder");
-        if (!this.courseRootFiles[index]["Файлы"]) {
+
+        // Если внутри папки есть ещё папки
+        if (Object.entries(this.courseRootFiles[index]).length > 2) {
           console.log("Есть подпапки");
 
+          // Находим подпапки
           let moreFolders = Object.keys(this.courseRootFiles[index]).filter(
-            (item) => item !== "Папка"
+            (item) => item !== "Папка" && item !== "Файлы"
           );
 
           this.inFolderFolders = moreFolders;
@@ -139,28 +142,35 @@ export default {
           // moreFolders.forEach((folder) => {
           //   console.log(this.courseRootFiles[index][folder]["Папка"]);
           // });
+        } else {
+          this.has_more_folders = false;
+          this.inFolderFolders = null;
         }
+
         this.folderName = this.courseRootFiles[index]["Папка"];
         this.inFolderFiles = this.courseRootFiles[index]["Файлы"];
       }
     },
     openFolder(i) {
-      console.log(i);
-      this.active = true;
+      console.log("Открыта папка " + i);
+      console.log(this.courseRootFiles);
       //TODO: Возможна ошибка связанная с sub-folders
       this.has_files = true;
     },
-    sourceCreator(i, marker) {
-      if (marker === "subfolder") {
+    sourceCreator(i, marker, item) {
+      this.subfolderName = item;
+
+      if (marker === "subfile") {
         this.fileName = this.inFolderFiles[i];
         this.source = `${this.rootDirectory}/${this.Title}/${this.folderName}/${this.fileName}`;
-      } else {
-        this.source = `${this.rootDirectory}/${this.Title}/${this.fileName}`;
+      } else if (marker === "subfolder") {
+        this.source = `${this.rootDirectory}/${this.Title}/${this.subfolderName}/ИМЯ ФАЙЛА`;
       }
 
       // logger
       console.log(this.source);
     },
+    findSubFiles(i, item) {},
   },
 };
 </script>

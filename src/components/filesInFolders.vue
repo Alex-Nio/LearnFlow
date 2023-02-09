@@ -3,29 +3,46 @@
     class="subfolders"
     v-if="has_files && this.folderName === this.courseRootFiles[targetIndex]['Папка']"
   >
-    <p
-      class="sub-folder-item"
-      @click="sourceCreator(i, 'subfolder')"
-      v-for="(item, i) in this.inFolderFiles"
-    >
-      {{ item }}
-    </p>
+    <div v-if="this.inFolderFiles" class="sub-files">
+      <p style="font-weight: bold; font-size: 2rem">Файлы</p>
+      <p
+        class="sub-folder-item"
+        @click="sourceCreator(i, 'subfile')"
+        v-for="(item, i) in this.inFolderFiles"
+      >
+        {{ item }}
+      </p>
+    </div>
+    <div class="sub-folders">
+      <p style="font-weight: bold; font-size: 2rem">Подпапки</p>
+      <p
+        class="sub-folder-item"
+        @click="sourceCreator(i, 'subfolder', item), findSubFiles(i, item)"
+        v-for="(item, i) in this.inFolderFolders"
+      >
+        {{ item }}
+      </p>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ["has_files", "folderName", "courseRootFiles", "inFolderFiles", "targetIndex"],
+  props: [
+    "has_files",
+    "folderName",
+    "courseRootFiles",
+    "inFolderFiles",
+    "inFolderFolders",
+    "targetIndex",
+  ],
   methods: {
-    findIndex(i) {
-      this.$emit("find", i);
+    sourceCreator(i, marker, item) {
+      this.$emit("srcCreate", i, marker, item);
     },
-    sourceCreator(i, marker) {
-      this.$emit("srcCreate", i, marker);
+    findSubFiles(i, item) {
+      this.$emit("findSubFiles", i, item);
     },
-  },
-  mounted() {
-    console.log(this.SubFolders);
   },
 };
 </script>
