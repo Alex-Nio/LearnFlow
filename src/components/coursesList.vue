@@ -45,7 +45,7 @@ export default {
       this.activeCategoryIndex = index;
       this.activeCategory = category;
       this.trigger = true;
-      this.categoryName = this.activeCategory[0];
+      this.categoryName = decodeURI(this.activeCategory[0]);
     },
   },
 };

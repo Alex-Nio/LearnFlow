@@ -30,14 +30,14 @@ export default {
   width: 100%;
   max-width: 820px;
   padding: 20px;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 16px;
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.7);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  transition: all 0.5s linear;
+  box-shadow: -1px 2px 8px 0px rgba(34, 60, 80, 0.05);
   margin: 0 auto;
   min-height: 270px;
-  transition: all 0.5s ease-out;
   box-sizing: border-box;
 }
 .course-list__item {

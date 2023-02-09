@@ -1,7 +1,7 @@
 <template>
   <div class="root-files">
     <div v-for="(folder, i) in this.inRootFiles">
-      <p @click="findIndex(i), sourceCreator(i, 'file')">
+      <p class="root-files__item" @click="findIndex(i), sourceCreator(i, 'file')">
         {{ folder }}
       </p>
     </div>
@@ -25,7 +25,14 @@ export default {
 
 <style lang="scss" scoped>
 .root-files {
-  margin: 25px 0;
   font-size: 2.2rem;
+  padding: 5px 0;
+}
+
+.root-files__item {
+  &:hover {
+    color: red;
+    cursor: pointer;
+  }
 }
 </style>

@@ -49,10 +49,10 @@ export default {
 
 .video-close-btn {
   position: absolute;
-  top: 30px;
+  top: 25px;
   right: 30px;
-  width: 45px;
-  height: 45px;
+  width: 35px;
+  height: 35px;
   background: transparent;
   cursor: pointer;
   z-index: 25;

@@ -50,7 +50,7 @@ export default {
 
 .header {
   width: 100%;
-  height: 75px;
+  height: 60px;
 }
 .nav {
   @include fdrjs_aic;

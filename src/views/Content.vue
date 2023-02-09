@@ -1,51 +1,53 @@
 <template>
-  <h1 class="course-title">{{ Title }}</h1>
-  <video-player
-    v-if="videoOpen"
-    :source="source"
-    :fileName="fileName.replace('.mp4', '')"
-    @closeVideo="closeVideo"
-  ></video-player>
+  <div class="wrapper" @click="this.showFolders = !this.showFolders">
+    <h1 class="course-title">{{ Title }}</h1>
+    <video-player
+      v-if="videoOpen"
+      :source="source"
+      :fileName="fileName.replace('.mp4', '')"
+      @closeVideo="closeVideo"
+    ></video-player>
 
-  <div class="root">
-    <div class="content">
-      <!-- Папки в корне урока -->
-      <lesson-folders
-        @find="findIndex"
-        @open="openFolder"
+    <div class="root">
+      <div class="content">
+        <!-- Папки в корне урока -->
+        <lesson-folders
+          @find="findIndex"
+          @open="openFolder"
+          :courseRootFiles="courseRootFiles"
+        ></lesson-folders>
+
+        <!-- Файлы по дефолту в корне -->
+        <files-in-root
+          :inRootFiles="inRootFiles"
+          @find="findIndex"
+          @srcCreate="sourceCreator"
+        ></files-in-root>
+      </div>
+
+      <!-- Файлы и папки внутри папки урока -->
+      <files-in-folders
+        v-show="showFolders"
+        :has_files="has_files"
+        :folderName="folderName"
         :courseRootFiles="courseRootFiles"
-      ></lesson-folders>
-
-      <!-- Файлы по дефолту в корне -->
-      <files-in-root
-        :inRootFiles="inRootFiles"
-        @find="findIndex"
+        :inFolderFiles="inFolderFiles"
+        :inFolderFolders="inFolderFolders"
+        :targetIndex="targetIndex"
+        @findSubFiles="findSubFiles"
         @srcCreate="sourceCreator"
-      ></files-in-root>
-    </div>
-
-    <!-- Файлы и папки внутри папки урока -->
-    <files-in-folders
-      :has_files="has_files"
-      :folderName="folderName"
-      :courseRootFiles="courseRootFiles"
-      :inFolderFiles="inFolderFiles"
-      :inFolderFolders="inFolderFolders"
-      :targetIndex="targetIndex"
-      @findSubFiles="findSubFiles"
-      @srcCreate="sourceCreator"
-      @openVideo="openVideo"
-      @closePanel="closePanel"
-      :emits="['find', 'default']"
-    ></files-in-folders>
-
-    <!-- TODO: Подапки -->
-    <!-- <subfolders-in-folders
+        @openVideo="openVideo"
+        @closePanel="closePanel"
+        :emits="['find', 'default']"
+      ></files-in-folders>
+      <!-- TODO: Подапки -->
+      <!-- <subfolders-in-folders
       :filtredSubFiles="filtredSubfolderContentFiles"
       :filtredSubFolders="filtredSubfolderContentFolders"
       :deepFolders="deepFolders"
       >В разработке</subfolders-in-folders
     > -->
+    </div>
   </div>
 </template>
 
@@ -55,7 +57,6 @@ import lessonFolders from "@/components/lessonFolders.vue";
 import filesInRoot from "@/components/filesInRoot.vue";
 import filesInFolders from "@/components/filesInFolders.vue";
 import subfoldersInFolders from "@/components/deepFoldering/subfoldersInFolders.vue";
-import defaultPopup from "@/components/defaultPopup.vue";
 export default {
   props: ["courses", "pageName", "categoryName"],
   components: {
@@ -64,7 +65,6 @@ export default {
     filesInRoot,
     lessonFolders,
     subfoldersInFolders,
-    defaultPopup,
   },
   data() {
     return {
@@ -97,6 +97,7 @@ export default {
       has_files: false,
       has_more_folders: false,
       videoOpen: false,
+      showFolders: false,
     };
   },
   mounted() {
@@ -135,13 +136,13 @@ export default {
       this.targetIndex = index;
 
       if (typeof index === "number") {
-        console.log("its file");
+        // console.log("its file");
         this.fileIndex = this.courseRootFiles["Файлы"][index];
         this.fileName = this.fileIndex;
         this.source = `${decodeURI(this.$route.path)}/${this.fileName}`;
         this.openVideo();
       } else {
-        console.log("its folder");
+        // console.log("its folder");
 
         // Если внутри папки есть ещё папки
         if (Object.entries(this.courseRootFiles[index]).length > 2) {
@@ -167,7 +168,7 @@ export default {
       }
     },
     openFolder(i, folder) {
-      console.log("Открыта папка " + i);
+      // console.log("Открыта папка " + i);
       this.subfolderContentFiles = folder;
       //TODO: Возможна ошибка связанная с sub-folders
       this.has_files = true;
@@ -221,14 +222,14 @@ export default {
       this.deepFolders = deepFolders;
     },
     openVideo() {
-      console.log("video opened");
+      // console.log("video opened");
 
       if (this.source.includes(".mp4")) {
         this.videoOpen = !this.videoOpen;
-        console.log(".mp4 found in the string");
+        // console.log(".mp4 found in the string");
       } else {
         window.open(this.source);
-        console.log(".mp4 not found in the string");
+        // console.log(".mp4 not found in the string");
       }
     },
     closeVideo() {
@@ -248,7 +249,9 @@ export default {
   justify-content: flex-start;
   overflow-inline: hidden;
   width: calc(100% - 40px);
-  max-height: calc(100vh - 235px);
+  max-width: 1200px;
+  min-height: 480px;
+  max-height: 480px;
   position: absolute;
   top: 115px;
   left: 50%;
@@ -256,13 +259,11 @@ export default {
   overflow: hidden;
   overflow-y: scroll;
   padding: 40px;
-  /* From https://css.glass */
-  background: rgba(234, 244, 244, 0.23);
-  border-radius: 16px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(9.6px);
-  -webkit-backdrop-filter: blur(9.6px);
-  border: 1px solid rgba(234, 244, 244, 0.09);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.7);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow: -1px 2px 8px 0px rgba(34, 60, 80, 0.05);
 }
 
 .root {
@@ -270,12 +271,14 @@ export default {
   flex-direction: column;
   width: 100%;
   max-width: 100%;
+  height: 100vh;
 }
 
 .course-title {
   font-size: 4rem;
   text-align: center;
-  margin-bottom: 45px;
+  margin-bottom: 25px;
+  text-transform: uppercase;
 }
 
 .fade-enter-active,

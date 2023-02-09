@@ -1,25 +1,27 @@
 <template>
   <div class="subfolders" v-if="has_files">
-    <button @click="closePanel" class="video-close-btn">
-      <img src="../assets/img/video-close-white.svg" alt="" />
-    </button>
-    <div v-if="this.inFolderFiles" class="sub-files">
-      <p
-        class="sub-folder-item"
-        @click="sourceCreator(i, 'subfile'), openVideo()"
-        v-for="(item, i) in this.inFolderFiles"
-      >
-        {{ item }}
-      </p>
-    </div>
-    <div class="sub-folders">
-      <p
-        class="sub-folder-item"
-        @click="sourceCreator(i, 'subfolder', item), findSubFiles(i, item), openVideo()"
-        v-for="(item, i) in this.inFolderFolders"
-      >
-        {{ item }}
-      </p>
+    <div class="subfolders__content">
+      <button @click="closePanel" class="close-panel-btn">
+        <img src="../assets/img/close-icon.svg" alt="" />
+      </button>
+      <div v-if="this.inFolderFiles" class="sub-files">
+        <p
+          class="sub-folder-item"
+          @click="sourceCreator(i, 'subfile'), openVideo()"
+          v-for="(item, i) in this.inFolderFiles"
+        >
+          {{ item }}
+        </p>
+      </div>
+      <div class="sub-folders">
+        <p
+          class="sub-folder-item"
+          @click="sourceCreator(i, 'subfolder', item), findSubFiles(i, item), openVideo()"
+          v-for="(item, i) in this.inFolderFolders"
+        >
+          {{ item }}
+        </p>
+      </div>
     </div>
   </div>
 </template>
@@ -54,31 +56,72 @@ export default {
 <style lang="scss" scoped>
 .subfolders {
   position: absolute;
-  top: 0;
+  top: 37%;
   left: 50%;
-  transform: translate(-50%, 0);
+  transform: translate(-50%, -50%);
   width: calc(100% - 40px);
+  max-width: 1200px;
   height: 100%;
-  min-height: calc(100vh - 40px - 75px);
-  padding: 35px;
-  /* From https://css.glass */
-  background: rgba(82, 183, 136, 0.42);
-  border-radius: 16px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(9.6px);
-  -webkit-backdrop-filter: blur(9.6px);
-  border: 1px solid rgba(82, 183, 136, 0.09);
+  max-height: 515px;
+  min-height: 400px;
+  border-radius: 1rem;
+  background-image: linear-gradient(-225deg, #b7f8db 0%, #50a7c2 100%);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  transition: all 0.5s linear;
+  box-shadow: -1px 2px 8px 0px rgb(34 60 80 / 5%);
   overflow: hidden;
   overflow-y: scroll;
   animation: fadeIn 0.5s linear;
 }
+
+/* хром, сафари */
+.subfolders::-webkit-scrollbar {
+  width: 0;
+}
+
+/* ie 10+ */
+.subfolders {
+  -ms-overflow-style: none;
+}
+
+/* фф (свойство больше не работает, других способов тоже нет)*/
+.subfolders {
+  overflow: -moz-scrollbars-none;
+}
+
+.subfolders__content {
+  position: relative;
+  height: 515px;
+  padding: 35px;
+}
+
+.close-panel-btn {
+  position: fixed;
+  top: 25px;
+  right: 30px;
+  width: 35px;
+  height: 35px;
+  background: transparent;
+  cursor: pointer;
+  z-index: 25;
+
+  & img {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+}
+
 .sub-folder-item {
   font-size: 1.8rem;
-  margin: 5px 0;
+  margin: 10px 0;
+  transition: color 0.3s linear;
 
   &:hover {
     cursor: pointer;
-    color: #d8f3dc;
+    color: #f48c06;
+    transition: all 0.3s linear;
   }
 }
 </style>

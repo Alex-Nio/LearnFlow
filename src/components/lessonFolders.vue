@@ -1,8 +1,8 @@
 <template>
   <div class="root-folders" v-for="(folder, i) in this.courseRootFiles">
-    <p class="root-folders__item" @click="findIndex(i), openFolder(i, folder)">
-      {{ folder["Папка"] }}
-    </p>
+    <div @click="findIndex(i), openFolder(i, folder)">
+      <p class="root-folders__item">{{ folder["Папка"] }}</p>
+    </div>
   </div>
 </template>
 
@@ -24,6 +24,7 @@ export default {
 <style lang="scss" scoped>
 .root-folders__item {
   font-size: 2.2rem;
+  padding: 5px 0;
 
   &:hover {
     color: red;

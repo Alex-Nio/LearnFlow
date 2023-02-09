@@ -10,7 +10,7 @@ const routes = [
         props: true
     },
     {
-        path: "/Курсы/:categoryName/:pageName",
+        path: encodeURI("/Курсы/:categoryName/:pageName"),
         name: "Content",
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
