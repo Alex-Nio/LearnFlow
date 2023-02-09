@@ -37,6 +37,7 @@
     <subfolders-in-folders
       :filtredSubFiles="filtredSubfolderContentFiles"
       :filtredSubFolders="filtredSubfolderContentFolders"
+      :deepFolders="deepFolders"
     ></subfolders-in-folders>
   </div>
 </template>
@@ -46,7 +47,7 @@ import videoPlayer from "@/components/videoPlayer.vue";
 import lessonFolders from "@/components/lessonFolders.vue";
 import filesInRoot from "@/components/filesInRoot.vue";
 import filesInFolders from "@/components/filesInFolders.vue";
-import subfoldersInFolders from "@/components/subfoldersInFolders.vue";
+import subfoldersInFolders from "@/components/deepFoldering/subfoldersInFolders.vue";
 import defaultPopup from "@/components/defaultPopup.vue";
 export default {
   props: {
@@ -84,6 +85,8 @@ export default {
       // Отфильтрованное содержимое подпапки
       filtredSubfolderContentFiles: [],
       filtredSubfolderContentFolders: [],
+      // Последний уровень
+      deepFolders: [],
       // Индекс файла или папки
       fileIndex: null,
       targetIndex: null,
@@ -184,10 +187,14 @@ export default {
       console.log(this.source);
     },
     findSubFiles(i, item) {
-      // console.log(this.subfolderContentFiles[item]);
+      this.filtredSubfolderContentFiles = "";
+      this.filtredSubfolderContentFolders = "";
+      this.deepFolders = "";
+
       let mutation = Object.entries(this.subfolderContentFiles[item]);
       let subContentFiles = [],
-        subContentFolders = [];
+        subContentFolders = [],
+        deepFolders = [];
 
       for (const [key, value] of mutation) {
         if (key !== "Папка") {
@@ -199,8 +206,21 @@ export default {
         }
       }
 
+      subContentFiles = subContentFiles.map(Object.values);
+
       this.filtredSubfolderContentFiles = subContentFiles;
       this.filtredSubfolderContentFolders = subContentFolders;
+
+      this.filtredSubfolderContentFolders.forEach((item) => {
+        if (Object.entries(item)[0][0] == "Папка") {
+          console.log(item);
+          deepFolders.push(item);
+        }
+      });
+
+      this.deepFolders = deepFolders;
+
+      console.log(this.deepFolders);
     },
   },
 };
