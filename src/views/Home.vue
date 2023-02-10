@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import coursesList from "@/components/coursesList.vue";
+import coursesList from "@/components/HomeComponents/coursesList.vue";
 
 export default {
   components: {

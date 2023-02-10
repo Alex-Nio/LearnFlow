@@ -13,7 +13,7 @@
 
 <script>
 import coursesData from "@/assets/data/courses";
-import Navigation from "./components/Navigation.vue";
+import Navigation from "./components/HomeComponents/navActions/Navigation.vue";
 
 export default {
   components: {

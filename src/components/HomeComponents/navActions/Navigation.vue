@@ -3,7 +3,7 @@
     <nav class="nav">
       <router-link class="nav-item" to="/">
         <span>На главную</span>
-        <img src="../assets/img/home.png" alt="" />
+        <img src="../../../assets/img/home.png" alt="" />
       </router-link>
       <nav-search
         :courses="courses"
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import navSearch from "@/components/navSearch";
+import navSearch from "@/components/HomeComponents/navActions/navSearch";
 export default {
   props: ["courses"],
   data() {

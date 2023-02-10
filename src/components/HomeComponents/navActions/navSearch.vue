@@ -13,7 +13,7 @@
           placeholder="Найти"
         />
         <button type="submit" class="searchButton">
-          <img src="./../assets/img/search-btn.gif" alt="" />
+          <img src="../../../assets/img/search-btn.gif" alt="" />
         </button>
       </div>
       <p class="search-title">Искать:</p>
@@ -63,7 +63,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/scss/imports.scss";
+@import "../../../assets/scss/imports.scss";
 .search {
   width: 100%;
   max-width: 610px;

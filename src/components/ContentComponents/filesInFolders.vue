@@ -2,7 +2,7 @@
   <div class="subfolders" v-if="has_files">
     <div class="subfolders__content">
       <button @click="closePanel" class="close-panel-btn">
-        <img src="../assets/img/close-icon.svg" alt="" />
+        <img src="../../assets/img/close-icon.svg" alt="" />
       </button>
       <div v-if="this.inFolderFiles" class="sub-files">
         <p

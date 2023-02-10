@@ -24,7 +24,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/scss/imports.scss";
+@import "../../assets/scss/imports.scss";
 .course-content {
   @include fdrjc_aic;
   width: 100%;

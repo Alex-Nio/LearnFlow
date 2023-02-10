@@ -53,10 +53,10 @@
 </template>
 
 <script>
-import videoPlayer from "@/components/videoPlayer.vue";
-import lessonFolders from "@/components/lessonFolders.vue";
-import filesInRoot from "@/components/filesInRoot.vue";
-import filesInFolders from "@/components/filesInFolders.vue";
+import videoPlayer from "@/components/ContentComponents/videoPlayer.vue";
+import lessonFolders from "@/components/ContentComponents/lessonFolders.vue";
+import filesInRoot from "@/components/ContentComponents/filesInRoot.vue";
+import filesInFolders from "@/components/ContentComponents/filesInFolders.vue";
 import subfoldersInFolders from "@/components/deepFoldering/subfoldersInFolders.vue";
 export default {
   props: ["courses", "pageName", "categoryName"],

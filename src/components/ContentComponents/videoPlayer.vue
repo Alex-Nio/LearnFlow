@@ -1,7 +1,7 @@
 <template>
   <div class="video">
     <button @click="closeVideo" class="video-close-btn">
-      <img src="../assets/img/video-close-white.svg" alt="" />
+      <img src="../../assets/img/video-close-white.svg" alt="" />
     </button>
     <div id="video" class="test-player-wrap">
       <vue3-video-player
