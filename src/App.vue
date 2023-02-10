@@ -1,6 +1,6 @@
 <template>
   <div class="full-wrapper">
-    <Navigation></Navigation>
+    <Navigation :courses="courses"></Navigation>
     <main class="main">
       <div class="container">
         <div class="main-content">
@@ -23,13 +23,16 @@ export default {
     return {
       courses: {
         categories: [],
+        categoryTitles: [],
       },
     };
   },
   mounted() {
     const data = JSON.parse(JSON.stringify(coursesData));
     const courses = data["Курсы"];
-    let coursesCategoryList = [];
+    let coursesCategoryList = [],
+      coursesCategoryTitles = [],
+      lessonsList = [];
 
     courses.forEach((course) => {
       let x = Object.entries(course);
@@ -37,6 +40,12 @@ export default {
     });
 
     this.courses.categories = coursesCategoryList;
+
+    this.courses.categories.forEach((category, i) => {
+      coursesCategoryTitles.push(category[0]);
+    });
+
+    this.courses.categoryTitles = coursesCategoryTitles;
   },
 };
 </script>

@@ -5,14 +5,12 @@
         <span>На главную</span>
         <img src="../assets/img/home.png" alt="" />
       </router-link>
-      <nav-search v-model:searchQuery="searchQuery"></nav-search>
-      <!-- <div class="search-result-wrapper">
-        <div class="search-result" :key="item">
-          <div class="search-result-item">
-            <a @click.prevent="foundItem">{{ item }}</a>
-          </div>
-        </div>
-      </div> -->
+      <nav-search
+        :courses="courses"
+        v-model:searchQuery="searchQuery"
+        @update:searchQuery="updateSearchQuery"
+        :filteredItems="filteredItems"
+      ></nav-search>
     </nav>
   </header>
 </template>
@@ -20,6 +18,7 @@
 <script>
 import navSearch from "@/components/navSearch";
 export default {
+  props: ["courses"],
   data() {
     return {
       searchQuery: "",
@@ -27,6 +26,20 @@ export default {
   },
   components: {
     navSearch,
+  },
+  methods: {
+    updateSearchQuery(value) {
+      this.searchQuery = value;
+    },
+  },
+  computed: {
+    filteredItems() {
+      let items = this.courses.categoryTitles;
+
+      return items.filter((item) =>
+        item.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+    },
   },
 };
 </script>

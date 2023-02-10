@@ -3,10 +3,9 @@
   <courses-categories :courses="courses" @open="openCategory"></courses-categories>
   <!-- Курсы -->
   <transition
-    :duration="900"
     mode="out-in"
-    enter-active-class="animate__animated animate__fadeInUp"
-    leave-active-class="animate__animated animate__fadeOutDown"
+    enter-active-class="animate__animated animate__fadeIn"
+    leave-active-class="animate__animated animate__fadeOut"
   >
     <course-content
       v-if="this.activeCategoryIndex !== null"

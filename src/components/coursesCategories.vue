@@ -46,11 +46,11 @@ export default {
       onSwiper: (swiper) => {
         let slides;
 
-        if (swiper) {
-          slides = document.querySelectorAll(".swiper-slide");
+        // if (swiper) {
+        //   slides = document.querySelectorAll(".swiper-slide");
 
-          slides[swiper.activeIndex].lastElementChild.click();
-        }
+        //   slides[swiper.activeIndex].lastElementChild.click();
+        // }
       },
       onSlideChange: (swiper) => {
         let slides;

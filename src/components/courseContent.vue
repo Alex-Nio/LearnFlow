@@ -35,7 +35,6 @@ export default {
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   transition: all 0.5s linear;
-  box-shadow: -1px 2px 8px 0px rgba(34, 60, 80, 0.05);
   margin: 0 auto;
   min-height: 270px;
   box-sizing: border-box;

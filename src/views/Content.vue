@@ -27,6 +27,7 @@
 
       <!-- Файлы и папки внутри папки урока -->
       <files-in-folders
+        :activeSubFolder="subfolderName"
         v-show="showFolders"
         :has_files="has_files"
         :folderName="folderName"

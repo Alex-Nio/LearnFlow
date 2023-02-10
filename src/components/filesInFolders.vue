@@ -7,7 +7,8 @@
       <div v-if="this.inFolderFiles" class="sub-files">
         <p
           class="sub-folder-item"
-          @click="sourceCreator(i, 'subfile'), openVideo()"
+          :class="{ active: active == i && item == this.activeSubFolder }"
+          @click="sourceCreator(i, 'subfile', item), openVideo()"
           v-for="(item, i) in this.inFolderFiles"
         >
           {{ item }}
@@ -28,6 +29,11 @@
 
 <script>
 export default {
+  data() {
+    return {
+      active: null,
+    };
+  },
   props: [
     "has_files",
     "folderName",
@@ -35,9 +41,11 @@ export default {
     "inFolderFiles",
     "inFolderFolders",
     "targetIndex",
+    "activeSubFolder",
   ],
   methods: {
     sourceCreator(i, marker, item) {
+      this.active = i;
       this.$emit("srcCreate", i, marker, item);
     },
     findSubFiles(i, item) {
@@ -125,6 +133,10 @@ export default {
     cursor: pointer;
     color: #f48c06;
     transition: all 0.3s linear;
+  }
+
+  &.active {
+    color: #f48c06;
   }
 }
 </style>
