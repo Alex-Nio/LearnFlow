@@ -27,11 +27,18 @@ To install and run LearnFlow, follow the steps below:
 
 [^2]: npm install
 
-3. Run the application[^3]:
+3. Use PFP[https://github.com/Alex-Nio/NFP]
 
-[^3]: npm run serve
+-   generate json data
+-   upload data to 'assets\data'
+-   rename your datafile to courses.json
+-   run build command if you want to use distributed project on open server
 
-4. Open your browser and navigate to http://localhost:8080/ to view the application.
+4. Run the application[^4]:
+
+[^4]: npm run serve
+
+5. Open your browser and navigate to http://localhost:8080/ to view the application.
 
 ## License
 
