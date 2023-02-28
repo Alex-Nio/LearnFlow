@@ -434,87 +434,8 @@
                         }
                     }
                 },
-                "Vue 3 2021 Владилен Минин": {
-                    "Папка": "Vue 3 2021 Владилен Минин",
-                    "Файлы": [
-                        "001.mp4",
-                        "001_1.txt",
-                        "002.mp4",
-                        "002_1.zip",
-                        "002_2.zip",
-                        "003.mp4",
-                        "003_1.zip",
-                        "003_2.zip",
-                        "004.mp4",
-                        "004_1.zip",
-                        "004_2.zip",
-                        "004_3.txt",
-                        "004_3.zip",
-                        "004_4.zip",
-                        "005.mp4",
-                        "006.mp4",
-                        "006_1.zip",
-                        "006_2.zip",
-                        "007.mp4",
-                        "007_1.zip",
-                        "007_2.zip",
-                        "008.mp4",
-                        "008_1.txt",
-                        "008_1.zip",
-                        "008_2.zip",
-                        "008_3.zip",
-                        "008_4.zip",
-                        "009.mp4",
-                        "009_1.zip",
-                        "009_2.zip",
-                        "010.mp4",
-                        "010_1.zip",
-                        "010_2.zip",
-                        "011.mp4",
-                        "011_1.zip",
-                        "011_2.zip",
-                        "012.mp4",
-                        "012_1.zip",
-                        "012_2.zip",
-                        "012_3.txt",
-                        "012_3.zip",
-                        "012_4.zip",
-                        "013.mp4",
-                        "013_1.zip",
-                        "013_2.zip",
-                        "014.mp4",
-                        "014_1.zip",
-                        "014_2.zip",
-                        "bonus1_01.mp4",
-                        "bonus1_02.mp4",
-                        "bonus2.pdf",
-                        "bonus_1.zip",
-                        "bonus_10.zip",
-                        "bonus_11.zip",
-                        "bonus_12.zip",
-                        "bonus_13.zip",
-                        "bonus_14.zip",
-                        "bonus_15.zip",
-                        "bonus_16.zip",
-                        "bonus_17.zip",
-                        "bonus_18.zip",
-                        "bonus_19.zip",
-                        "bonus_2.zip",
-                        "bonus_20.zip",
-                        "bonus_3.zip",
-                        "bonus_4.zip",
-                        "bonus_5.zip",
-                        "bonus_6.zip",
-                        "bonus_7.zip",
-                        "bonus_8.zip",
-                        "bonus_9.zip",
-                        "infocigan.mp4",
-                        "kritika.mp4",
-                        "title.txt"
-                    ]
-                },
-                "Vue.js - с нуля до про": {
-                    "Папка": "Vue.js - с нуля до про",
+                "[tocode.ru] Vue.js - с нуля до про": {
+                    "Папка": "[tocode.ru] Vue.js - с нуля до про",
                     "Файлы": [
                         "code.zip",
                         "lesson01.mp4",
@@ -688,6 +609,94 @@
                         "lesson98.mp4",
                         "lesson99.mp4",
                         "Vue.js с нуля до про.txt"
+                    ]
+                },
+                "[tocode.ru] Курс по Vue.js 3 Практическое руководство c нуля до результата (2021)": {
+                    "Папка": "[tocode.ru] Курс по Vue.js 3 Практическое руководство c нуля до результата (2021)",
+                    "Файлы": [
+                        "lesson1.mp4",
+                        "lesson10.mp4",
+                        "lesson11.mp4",
+                        "lesson12.mp4",
+                        "lesson13.mp4",
+                        "lesson14.mp4",
+                        "lesson15.mp4",
+                        "lesson16.mp4",
+                        "lesson17.mp4",
+                        "lesson18.mp4",
+                        "lesson19.mp4",
+                        "lesson2.mp4",
+                        "lesson20.mp4",
+                        "lesson21.mp4",
+                        "lesson22.mp4",
+                        "lesson23.mp4",
+                        "lesson24.mp4",
+                        "lesson25.mp4",
+                        "lesson26.mp4",
+                        "lesson27.mp4",
+                        "lesson28.mp4",
+                        "lesson29.mp4",
+                        "lesson3.mp4",
+                        "lesson30.mp4",
+                        "lesson31.mp4",
+                        "lesson32.mp4",
+                        "lesson33.mp4",
+                        "lesson34.mp4",
+                        "lesson35.mp4",
+                        "lesson36.mp4",
+                        "lesson37.mp4",
+                        "lesson38.mp4",
+                        "lesson39.mp4",
+                        "lesson4.mp4",
+                        "lesson40.mp4",
+                        "lesson41.mp4",
+                        "lesson42.mp4",
+                        "lesson43.mp4",
+                        "lesson44.mp4",
+                        "lesson45.mp4",
+                        "lesson46.mp4",
+                        "lesson47.mp4",
+                        "lesson48.mp4",
+                        "lesson49.mp4",
+                        "lesson5.mp4",
+                        "lesson50.mp4",
+                        "lesson51.mp4",
+                        "lesson52.mp4",
+                        "lesson53.mp4",
+                        "lesson54.mp4",
+                        "lesson55.mp4",
+                        "lesson56.mp4",
+                        "lesson57.mp4",
+                        "lesson58.mp4",
+                        "lesson59.mp4",
+                        "lesson6.mp4",
+                        "lesson60.mp4",
+                        "lesson61.mp4",
+                        "lesson62.mp4",
+                        "lesson63.mp4",
+                        "lesson64.mp4",
+                        "lesson65.mp4",
+                        "lesson66.mp4",
+                        "lesson67.mp4",
+                        "lesson68.mp4",
+                        "lesson69.mp4",
+                        "lesson7.mp4",
+                        "lesson70.mp4",
+                        "lesson71.mp4",
+                        "lesson72.mp4",
+                        "lesson73.mp4",
+                        "lesson74.mp4",
+                        "lesson75.mp4",
+                        "lesson8.mp4",
+                        "lesson9.mp4",
+                        "Vue.js 3 - практическое руководство с нуля до результата!.txt",
+                        "модуль 4.zip",
+                        "модуль 5.zip",
+                        "модуль 6.zip",
+                        "модуль 7.zip",
+                        "модуль 9.zip",
+                        "модуль2.zip",
+                        "модуль3.zip"
                     ]
                 },
                 "[Udemy] Полный курс по JavaScript + React - с нуля до результата (2021)": {
@@ -3280,77 +3289,6 @@
                                 ]
                             }
                         }
-                    }
-                },
-                "[Дмитрий Лаврик] Vue.js": {
-                    "Папка": "[Дмитрий Лаврик] Vue.js",
-                    "Урок 1": {
-                        "Папка": "Урок 1",
-                        "Файлы": [
-                            "vue-1-1.mp4",
-                            "vue-1-2.mp4",
-                            "vue-lesson1-hw.txt",
-                            "vue-lesson1-src.zip"
-                        ]
-                    },
-                    "Урок 2": {
-                        "Папка": "Урок 2",
-                        "Файлы": [
-                            "vue-2.mp4",
-                            "vue-lesson2-hw.txt",
-                            "vue-lesson2-src.zip"
-                        ]
-                    },
-                    "Урок 3": {
-                        "Папка": "Урок 3",
-                        "Файлы": [
-                            "vue-3.mp4",
-                            "vue-lesson3-hw.txt",
-                            "vue-lesson3-src.zip"
-                        ]
-                    },
-                    "Урок 4": {
-                        "Папка": "Урок 4",
-                        "Файлы": [
-                            "vue-4-1.mp4",
-                            "vue-4-2.mp4",
-                            "vue-lesson4-hw.txt",
-                            "vue-lesson4-src-cli.zip",
-                            "vue-lesson4-src.zip"
-                        ]
-                    },
-                    "Урок 5": {
-                        "Папка": "Урок 5",
-                        "Файлы": [
-                            "vue-5-1.mp4",
-                            "vue-5-2.mp4",
-                            "vue-l5-cli.zip",
-                            "vue-lesson5_src.zip"
-                        ]
-                    },
-                    "Урок 6": {
-                        "Папка": "Урок 6",
-                        "Файлы": [
-                            "vue-6-1.mp4",
-                            "vue-6-2.mp4",
-                            "vue-lesson6-hw.txt",
-                            "vue-lesson6-src.zip"
-                        ]
-                    },
-                    "Урок 7": {
-                        "Папка": "Урок 7",
-                        "Файлы": [
-                            "vue-7.mp4",
-                            "vue-lesson7-hw.txt",
-                            "vue-lesson7-src.zip"
-                        ]
-                    },
-                    "Урок 8": {
-                        "Папка": "Урок 8",
-                        "Файлы": [
-                            "vue-8.mp4",
-                            "vue-lesson8_src.zip"
-                        ]
                     }
                 }
             }
