@@ -2,6 +2,7 @@
   <div class="root-folders" v-for="(folder, i) in this.courseRootFiles">
     <div @click="findIndex(i), openFolder(i, folder)">
       <p
+        v-if="folder['Папка']"
         class="root-folders__item"
         :class="{
           active: active == i,

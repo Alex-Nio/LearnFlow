@@ -68,6 +68,7 @@ export default {
   },
   mounted() {
     let btn = document.querySelector(".btn-volume");
+    let controlPanel = document.querySelector(".btn-control-panel");
     let volumeCntrl = document.querySelector(".volume-current");
     let volumeInfo = document.querySelector(".volume-info");
     let mouseEnterHandler;
@@ -93,14 +94,20 @@ export default {
       btn.addEventListener("mouseleave", () => {
         document.removeEventListener("wheel", wheelHandler);
       });
+
+      controlPanel.addEventListener("mouseleave", () => {
+        document.removeEventListener("wheel", wheelHandler);
+      });
     };
 
     btn.addEventListener("mouseenter", mouseEnterHandler);
+    controlPanel.addEventListener("mouseenter", mouseEnterHandler);
 
     volumeUpdate(this.volume);
   },
   beforeDestroy() {
     btn.removeEventListener("mouseenter", mouseEnterHandler);
+    controlPanel.removeEventListener("mouseenter", mouseEnterHandler);
   },
 };
 </script>
@@ -158,6 +165,18 @@ export default {
 .vcp-dashboard {
   width: 100% !important;
   margin: 0 !important;
+}
+
+.video-title {
+  padding: 10px 0px;
+  height: 80px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
+.play-pause-layer .btn-control .btn-play {
+  margin-left: 18px !important;
 }
 
 .cover-layer,
