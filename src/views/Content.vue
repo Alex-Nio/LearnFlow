@@ -127,6 +127,14 @@ export default {
 
           if (lesson[1]["Файлы"]) {
             this.inRootFiles = lesson[1]["Файлы"];
+            this.inRootFiles = this.inRootFiles.sort((a, b) => {
+              if (a.match(/\d+/) != null) {
+                const numA = parseInt(a.match(/\d+/)[0]);
+                const numB = parseInt(b.match(/\d+/)[0]);
+                return numA - numB;
+              }
+            });
+            console.log(this.inRootFiles);
           }
         }
       }
